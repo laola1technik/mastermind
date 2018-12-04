@@ -16,4 +16,16 @@ public class MastermindTest {
         Assert.assertEquals(0, result.getNumberOfWellPlaced());
         Assert.assertEquals(0, result.getNumberOfMisplaced());
     }
+
+    @Test
+    public void should_return_one_wellplaced_and_zero_misplaced_for_code_red_and_guess_red() {
+        CodePeg redCodePeg = new CodePeg(CodePeg.Type.RED);
+        Code correctCode = new Code(new CodePeg[]{redCodePeg});
+        Code guessedCode = new Code(new CodePeg[]{redCodePeg});
+
+        CompareResult result = correctCode.compareWith(guessedCode);
+
+        Assert.assertEquals(1, result.getNumberOfWellPlaced());
+        Assert.assertEquals(0, result.getNumberOfMisplaced());
+    }
 }

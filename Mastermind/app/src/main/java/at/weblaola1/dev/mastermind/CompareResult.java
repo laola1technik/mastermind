@@ -4,11 +4,15 @@ class CompareResult {
     private int numberOfMisplaced;
     private int numberOfWellPlaced;
 
-    public int getNumberOfMisplaced() {
+    int getNumberOfMisplaced() {
         return numberOfMisplaced;
     }
 
-    public int getNumberOfWellPlaced() {
+    int getNumberOfWellPlaced() {
         return numberOfWellPlaced;
+    }
+
+    void increaseNumberOfWellPlaced() {
+        numberOfWellPlaced++;
     }
 }
