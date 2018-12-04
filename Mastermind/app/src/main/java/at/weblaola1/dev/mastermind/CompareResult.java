@@ -1,9 +1,14 @@
 package at.weblaola1.dev.mastermind;
 
 class CompareResult {
+    private int numberOfMisplaced;
+    private int numberOfWellPlaced;
 
-    @Override
-    public boolean equals(Object obj) {
-        return true;
+    public int getNumberOfMisplaced() {
+        return numberOfMisplaced;
+    }
+
+    public int getNumberOfWellPlaced() {
+        return numberOfWellPlaced;
     }
 }

@@ -10,10 +10,10 @@ public class MastermindTest {
         CodePeg greenCodePeg = new CodePeg(CodePeg.Type.GREEN);
         Code correctCode = new Code(new CodePeg[]{redCodePeg});
         Code guessedCode = new Code(new CodePeg[]{greenCodePeg});
-        CompareResult expectedResult = new CompareResult();
 
         CompareResult result = correctCode.compareWith(guessedCode);
 
-        Assert.assertEquals(expectedResult, result);
+        Assert.assertEquals(0, result.getNumberOfWellPlaced());
+        Assert.assertEquals(0, result.getNumberOfMisplaced());
     }
 }
