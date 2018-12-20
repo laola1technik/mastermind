@@ -11,4 +11,9 @@ class CodePeg {
     public CodePeg(Type type) {
         this.type = type;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return type == ((CodePeg)obj).type;
+    }
 }
