@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(Parameterized.class)
@@ -51,9 +52,10 @@ public class MastermindTest {
     }
 
     private static Code createCode(CodePeg.Type... codePegTypes) {
-        CodePeg[] codePegs = new CodePeg[codePegTypes.length];
-        for (int i = 0; i < codePegTypes.length; i++) {
-            codePegs[i] = new CodePeg(codePegTypes[i]);
+        ArrayList<CodePeg> codePegs = new ArrayList<>();
+
+        for (CodePeg.Type codePegType : codePegTypes) {
+            codePegs.add(new CodePeg(codePegType));
         }
         return new Code(codePegs);
     }
