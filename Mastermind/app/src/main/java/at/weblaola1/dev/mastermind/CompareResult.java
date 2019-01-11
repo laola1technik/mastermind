@@ -4,6 +4,10 @@ class CompareResult {
     private int numberOfMisplaced;
     private int numberOfWellPlaced;
 
+    void setNumberOfMisplaced(int number) {
+        numberOfMisplaced = number;
+    }
+
     int getNumberOfMisplaced() {
         return numberOfMisplaced;
     }

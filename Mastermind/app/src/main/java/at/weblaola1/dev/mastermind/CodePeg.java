@@ -5,10 +5,11 @@ class CodePeg {
 
     public enum Type {
         RED,
-        GREEN
+        GREEN,
+        MAGENTA
     }
 
-    public CodePeg(Type type) {
+    CodePeg(Type type) {
         this.type = type;
     }
 

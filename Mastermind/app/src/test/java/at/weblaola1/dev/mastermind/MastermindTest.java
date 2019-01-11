@@ -35,17 +35,17 @@ public class MastermindTest {
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {
-                        "should_return_one_wellplaced_and_zero_misplaced_for_code_red_and_guess_red",
-                        createCode(CodePeg.Type.RED),
-                        createCode(CodePeg.Type.RED),
-                        1,
-                        0
-                },
-                {
                         "should_return_zero_well_placed_and_zero_misplaced_key_pegs_for_code_red_and_guess_green",
                         createCode(CodePeg.Type.RED),
                         createCode(CodePeg.Type.GREEN),
                         0,
+                        0
+                },
+                {
+                        "should_return_one_wellplaced_and_zero_misplaced_for_code_red_and_guess_red",
+                        createCode(CodePeg.Type.RED),
+                        createCode(CodePeg.Type.RED),
+                        1,
                         0
                 },
                 {
@@ -54,6 +54,13 @@ public class MastermindTest {
                         createCode(CodePeg.Type.RED, CodePeg.Type.GREEN),
                         2,
                         0
+                },
+                {
+                        "should_return_zero_wellplaced_and_one_misplaced_for_one_misplaced_peg",
+                        createCode(CodePeg.Type.RED, CodePeg.Type.GREEN),
+                        createCode(CodePeg.Type.MAGENTA, CodePeg.Type.RED),
+                        0,
+                        1
                 }
         });
     }
