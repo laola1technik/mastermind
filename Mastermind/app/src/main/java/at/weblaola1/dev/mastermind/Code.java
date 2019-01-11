@@ -10,11 +10,13 @@ class Code {
     }
 
     CompareResult compareWith(Code otherCode) {
-        if (codePegs.equals(otherCode.codePegs)) {
-            CompareResult compareResult = new CompareResult();
-            compareResult.increaseNumberOfWellPlaced();
-            return compareResult;
+        CompareResult compareResult = new CompareResult();
+        for (int i = 0; i < codePegs.size(); i++) {
+            if (codePegs.get(i).equals(otherCode.codePegs.get(i))) {
+                compareResult.increaseNumberOfWellPlaced();
+            }
         }
-        return new CompareResult();
+
+        return compareResult;
     }
 }
