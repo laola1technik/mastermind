@@ -1,8 +1,11 @@
 TODOs
-
+Refactor compareCode method with lambda expressions
+Extract code comparison
+More colors
 
 TEST LIST
-2 well placed
+2 misplaced
+1 misplaced, 1 well placed
 
 Knowledge
 6 colors
