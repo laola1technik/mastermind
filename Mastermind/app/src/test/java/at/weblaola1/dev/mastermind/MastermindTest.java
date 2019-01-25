@@ -68,6 +68,13 @@ public class MastermindTest {
                         createCode(CodePeg.Type.GREEN, CodePeg.Type.WHITE),
                         0,
                         2
+                },
+                {
+                        "should_return_one_wellplaced_and_one_misplaced",
+                        createCode(CodePeg.Type.WHITE, CodePeg.Type.GREEN, CodePeg.Type.YELLOW),
+                        createCode(CodePeg.Type.WHITE, CodePeg.Type.YELLOW, CodePeg.Type.MAGENTA),
+                        1,
+                        1
                 }
         });
     }
