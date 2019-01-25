@@ -6,7 +6,10 @@ class CodePeg {
     public enum Type {
         RED,
         GREEN,
-        MAGENTA
+        MAGENTA,
+        BLUE,
+        YELLOW,
+        WHITE,
     }
 
     CodePeg(Type type) {
