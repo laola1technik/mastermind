@@ -23,15 +23,15 @@ class Code {
             }
         }
 
-        for (int i = remainingCodePegs.size() - 1; i >= 0; i--) {
-            for (int j = remainingOtherCodePegs.size() - 1; j >= 0; j--) {
-                if (remainingCodePegs.get(i).equals(remainingOtherCodePegs.get(j))) {
-                    remainingOtherCodePegs.remove(j);
+        remainingCodePegs.forEach(peg -> {
+            for (int i = remainingOtherCodePegs.size() - 1; i >= 0; i--) {
+                if (peg.equals(remainingOtherCodePegs.get(i))) {
+                    remainingOtherCodePegs.remove(i);
                     compareResult.increaseNumberOfMisplaced();
                     break;
                 }
             }
-        }
+        });
         return compareResult;
     }
 }
