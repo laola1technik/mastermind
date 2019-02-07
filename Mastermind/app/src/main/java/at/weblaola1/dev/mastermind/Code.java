@@ -22,9 +22,16 @@ class Code {
                 remainingOtherCodePegs.remove(i);
             }
         }
-        remainingCodePegs.retainAll(remainingOtherCodePegs);
-        compareResult.setNumberOfMisplaced(remainingCodePegs.size());
 
+        for (int i = remainingCodePegs.size() - 1; i >= 0; i--) {
+            for (int j = remainingOtherCodePegs.size() - 1; j >= 0; j--) {
+                if (remainingCodePegs.get(i).equals(remainingOtherCodePegs.get(j))) {
+                    remainingOtherCodePegs.remove(j);
+                    compareResult.increaseNumberOfMisplaced();
+                    break;
+                }
+            }
+        }
         return compareResult;
     }
 }

@@ -75,6 +75,13 @@ public class MastermindTest {
                         createCode(CodePeg.Type.WHITE, CodePeg.Type.YELLOW, CodePeg.Type.MAGENTA),
                         1,
                         1
+                },
+                {
+                        "should_return_zero_wellplaced_and_one_misplaced_if_colour_matches_multiple_times",
+                        createCode(CodePeg.Type.MAGENTA, CodePeg.Type.MAGENTA, CodePeg.Type.MAGENTA, CodePeg.Type.GREEN),
+                        createCode(CodePeg.Type.RED, CodePeg.Type.RED, CodePeg.Type.RED, CodePeg.Type.MAGENTA),
+                        0,
+                        1
                 }
         });
     }
