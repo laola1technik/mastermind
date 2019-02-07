@@ -2,6 +2,7 @@ package at.weblaola1.dev.mastermind;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Code {
     private List<CodePeg> codePegs;
@@ -23,15 +24,18 @@ class Code {
             }
         }
 
-        remainingCodePegs.forEach(peg -> {
-            for (int i = remainingOtherCodePegs.size() - 1; i >= 0; i--) {
-                if (peg.equals(remainingOtherCodePegs.get(i))) {
-                    remainingOtherCodePegs.remove(i);
-                    compareResult.increaseNumberOfMisplaced();
-                    break;
-                }
-            }
-        });
+        List<CodePegType> pegTypes = remainingOtherCodePegs.stream().map(CodePeg::getType)
+                .collect(Collectors.toList());
+
+        remainingCodePegs.stream()
+                .map(CodePeg::getType)
+                .forEach(pegType -> {
+                    int pegTypeIndex = pegTypes.indexOf(pegType);
+                    if (pegTypeIndex > -1) {
+                        pegTypes.remove(pegTypeIndex);
+                        compareResult.increaseNumberOfMisplaced();
+                    }
+                });
         return compareResult;
     }
 }
