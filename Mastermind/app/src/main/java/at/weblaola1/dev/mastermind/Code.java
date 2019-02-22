@@ -16,25 +16,34 @@ class Code {
         List<CodePeg> remainingOtherCodePegs = new ArrayList<>(otherCode.codePegs);
         CompareResult compareResult = new CompareResult();
 
-        for (int i = codePegs.size() - 1; i >= 0; i--) {
-            if (codePegs.get(i).equals(otherCode.codePegs.get(i))) {
+        for (int codePegIndex = codePegs.size() - 1; codePegIndex >= 0; codePegIndex--) {
+            if (codePegs.get(codePegIndex).equals(otherCode.codePegs.get(codePegIndex))) {
                 compareResult.increaseNumberOfWellPlaced();
-                remainingCodePegs.remove(i);
-                remainingOtherCodePegs.remove(i);
+                remainingCodePegs.remove(codePegIndex);
+                remainingOtherCodePegs.remove(codePegIndex);
             }
         }
 
-        List<CodePegType> pegTypes = remainingOtherCodePegs.stream().map(CodePeg::getType)
+        compareResult.setNumberOfMisplaced(countMisplacedCodePegs(remainingCodePegs, remainingOtherCodePegs));
+
+        return compareResult;
+    }
+
+    private int countMisplacedCodePegs(List<CodePeg> codePegs, List<CodePeg> otherCodePegs) {
+        List<CodePegType> pegTypes = otherCodePegs.stream().map(CodePeg::getType)
                 .collect(Collectors.toList());
 
-        remainingCodePegs.forEach(codePeg -> {
-            CodePegType pegType = codePeg.getType();
-            int pegTypeIndex = pegTypes.indexOf(pegType);
-            if (pegTypeIndex > -1) {
-                pegTypes.remove(pegTypeIndex);
-                compareResult.increaseNumberOfMisplaced();
-            }
-        });
-        return compareResult;
+        return (int) codePegs.stream()
+                .filter(codePeg -> removedMisplacedPeg(pegTypes, codePeg.getType()))
+                .count();
+    }
+
+    private boolean removedMisplacedPeg(List<CodePegType> pegTypes, CodePegType pegType) {
+        int pegTypeIndex = pegTypes.indexOf(pegType);
+        if (pegTypeIndex > -1) {
+            pegTypes.remove(pegTypeIndex);
+            return true;
+        }
+        return false;
     }
 }

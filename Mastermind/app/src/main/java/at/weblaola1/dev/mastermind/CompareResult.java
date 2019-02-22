@@ -12,11 +12,11 @@ class CompareResult {
         return numberOfWellPlaced;
     }
 
-    void increaseNumberOfMisplaced() {
-        numberOfMisplaced++;
-    }
-
     void increaseNumberOfWellPlaced() {
         numberOfWellPlaced++;
+    }
+
+    void setNumberOfMisplaced(int numberOfMisplaced) {
+      this.numberOfMisplaced = numberOfMisplaced;
     }
 }
