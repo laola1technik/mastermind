@@ -11,26 +11,30 @@ class Code {
         this.codePegs = codePegs;
     }
 
-    CompareResult compareWith(Code otherCode) {
+    CompareResult compareWith(Code guessedCode) {
         List<CodePeg> remainingCodePegs = new ArrayList<>(codePegs);
-        List<CodePeg> remainingOtherCodePegs = new ArrayList<>(otherCode.codePegs);
+        List<CodePeg> remainingGuessedCodePegs = new ArrayList<>(guessedCode.codePegs);
         CompareResult compareResult = new CompareResult();
 
-        for (int codePegIndex = codePegs.size() - 1; codePegIndex >= 0; codePegIndex--) {
-            if (codePegs.get(codePegIndex).equals(otherCode.codePegs.get(codePegIndex))) {
-                compareResult.increaseNumberOfWellPlaced();
-                remainingCodePegs.remove(codePegIndex);
-                remainingOtherCodePegs.remove(codePegIndex);
-            }
-        }
+        removeWellPlacedPegs(remainingCodePegs, remainingGuessedCodePegs);
 
-        compareResult.setNumberOfMisplaced(countMisplacedCodePegs(remainingCodePegs, remainingOtherCodePegs));
+        compareResult.setNumberOfWellPlaced(codePegs.size() - remainingCodePegs.size());
+        compareResult.setNumberOfMisplaced(countMisplacedCodePegs(remainingCodePegs, remainingGuessedCodePegs));
 
         return compareResult;
     }
 
-    private int countMisplacedCodePegs(List<CodePeg> codePegs, List<CodePeg> otherCodePegs) {
-        List<CodePegType> pegTypes = otherCodePegs.stream().map(CodePeg::getType)
+    private void removeWellPlacedPegs(List<CodePeg> codePegs, List<CodePeg> guessedCodePegs) {
+        for (int codePegIndex = this.codePegs.size() - 1; codePegIndex >= 0; codePegIndex--) {
+            if (this.codePegs.get(codePegIndex).equals(guessedCodePegs.get(codePegIndex))) {
+                codePegs.remove(codePegIndex);
+                guessedCodePegs.remove(codePegIndex);
+            }
+        }
+    }
+
+    private int countMisplacedCodePegs(List<CodePeg> codePegs, List<CodePeg> guessedCodePegs) {
+        List<CodePegType> pegTypes = guessedCodePegs.stream().map(CodePeg::getType)
                 .collect(Collectors.toList());
 
         return (int) codePegs.stream()

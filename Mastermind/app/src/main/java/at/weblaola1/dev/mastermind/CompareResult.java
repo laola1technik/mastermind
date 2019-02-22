@@ -19,4 +19,8 @@ class CompareResult {
     void setNumberOfMisplaced(int numberOfMisplaced) {
       this.numberOfMisplaced = numberOfMisplaced;
     }
+
+    void setNumberOfWellPlaced(int numberOfWellPlaced) {
+        this.numberOfWellPlaced = numberOfWellPlaced;
+    }
 }
