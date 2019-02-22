@@ -27,15 +27,14 @@ class Code {
         List<CodePegType> pegTypes = remainingOtherCodePegs.stream().map(CodePeg::getType)
                 .collect(Collectors.toList());
 
-        remainingCodePegs.stream()
-                .map(CodePeg::getType)
-                .forEach(pegType -> {
-                    int pegTypeIndex = pegTypes.indexOf(pegType);
-                    if (pegTypeIndex > -1) {
-                        pegTypes.remove(pegTypeIndex);
-                        compareResult.increaseNumberOfMisplaced();
-                    }
-                });
+        remainingCodePegs.forEach(codePeg -> {
+            CodePegType pegType = codePeg.getType();
+            int pegTypeIndex = pegTypes.indexOf(pegType);
+            if (pegTypeIndex > -1) {
+                pegTypes.remove(pegTypeIndex);
+                compareResult.increaseNumberOfMisplaced();
+            }
+        });
         return compareResult;
     }
 }
