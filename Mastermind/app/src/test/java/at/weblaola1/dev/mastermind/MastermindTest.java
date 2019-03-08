@@ -7,6 +7,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RunWith(Parameterized.class)
 public class MastermindTest {
@@ -93,5 +94,16 @@ public class MastermindTest {
             codePegs.add(new CodePeg(codePegType));
         }
         return new Code(codePegs);
+    }
+
+    @Test
+    public void should_create_all_possible_codes_for_code_with_one_codePeg() {
+        int possibleColoursCount = 4;
+        int codePegCount = 1;
+        CodeGenerator codeGenerator = new CodeGenerator();
+
+        List<?> allPossibleCodes = codeGenerator.createAllCodes(possibleColoursCount, codePegCount);
+
+        Assert.assertEquals(((int) Math.pow(possibleColoursCount, codePegCount)), allPossibleCodes.size());
     }
 }
