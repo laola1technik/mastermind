@@ -12,10 +12,6 @@ class CompareResult {
         return numberOfWellPlaced;
     }
 
-    void increaseNumberOfWellPlaced() {
-        numberOfWellPlaced++;
-    }
-
     void setNumberOfMisplaced(int numberOfMisplaced) {
       this.numberOfMisplaced = numberOfMisplaced;
     }
