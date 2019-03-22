@@ -1,5 +1,6 @@
 package at.weblaola1.dev.mastermind;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -96,14 +97,4 @@ public class MastermindTest {
         return new Code(codePegs);
     }
 
-    @Test
-    public void should_create_all_possible_codes_for_code_with_one_codePeg() {
-        int possibleColoursCount = 4;
-        int codePegCount = 1;
-        CodeGenerator codeGenerator = new CodeGenerator();
-
-        List<?> allPossibleCodes = codeGenerator.createAllCodes(possibleColoursCount, codePegCount);
-
-        Assert.assertEquals(((int) Math.pow(possibleColoursCount, codePegCount)), allPossibleCodes.size());
-    }
 }

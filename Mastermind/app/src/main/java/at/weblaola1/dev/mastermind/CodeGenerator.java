@@ -5,12 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 class CodeGenerator {
-    public List<Code> createAllCodes(int possibleColoursCount, int codePegCount) {
-        return Arrays.asList(
-                new Code(Collections.singletonList(new CodePeg(CodePegType.MAGENTA))),
-                new Code(Collections.singletonList(new CodePeg(CodePegType.MAGENTA))),
-                new Code(Collections.singletonList(new CodePeg(CodePegType.MAGENTA))),
-                new Code(Collections.singletonList(new CodePeg(CodePegType.MAGENTA)))
+    private List<CodePegType> types;
+
+    CodeGenerator(CodePegType... types) {
+        this.types = Arrays.asList(types);
+    }
+
+    List<Code> createAllCodes(int codePegCount) {
+        return Collections.singletonList(
+                new Code(Collections.singletonList(new CodePeg(types.get(0))))
         );
     }
 }

@@ -2,6 +2,7 @@ package at.weblaola1.dev.mastermind;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 class Code {
@@ -49,5 +50,18 @@ class Code {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Code code = (Code) o;
+        return Objects.equals(codePegs, code.codePegs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codePegs);
     }
 }
