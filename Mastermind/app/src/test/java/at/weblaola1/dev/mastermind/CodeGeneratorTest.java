@@ -39,6 +39,19 @@ public class CodeGeneratorTest {
         assertThat(allPossibleCodes, hasItems(expectedCode));
     }
 
+    @Test
+    public void should_create_two_codes_for_two_colors() {
+        int codePegCount = 1;
+        CodeGenerator codeGenerator = new CodeGenerator(GREEN, BLUE);
+
+        List<Code> allPossibleCodes = codeGenerator.createAllCodes(codePegCount);
+
+        assertThat(allPossibleCodes, hasItems(
+                new Code(asList(greenCodePeg())),
+                new Code(asList(blueCodePeg())))
+        );
+    }
+
     @NonNull
     private CodePeg blueCodePeg() {
         return new CodePeg(BLUE);

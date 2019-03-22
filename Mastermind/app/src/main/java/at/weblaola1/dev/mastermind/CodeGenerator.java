@@ -2,7 +2,6 @@ package at.weblaola1.dev.mastermind;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 class CodeGenerator {
@@ -13,14 +12,18 @@ class CodeGenerator {
     }
 
     List<Code> createAllCodes(int codePegCount) {
-        List<CodePeg> codePegList = new ArrayList<>();
 
-        for (int i = 0; i < codePegCount; i++) {
-            codePegList.add(new CodePeg(types.get(0)));
+        List<Code> codes = new ArrayList<>();
+
+        for (int j = 0; j < types.size(); j++) {
+            List<CodePeg> codePegList = new ArrayList<>();
+
+            for (int i = 0; i < codePegCount; i++) {
+                codePegList.add(new CodePeg(types.get(j)));
+            }
+            codes.add(new Code(codePegList));
         }
 
-        return Collections.singletonList(
-                new Code(codePegList)
-        );
+        return codes;
     }
 }
