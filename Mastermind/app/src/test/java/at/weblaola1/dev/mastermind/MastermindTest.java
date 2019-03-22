@@ -1,6 +1,5 @@
 package at.weblaola1.dev.mastermind;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +7,6 @@ import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @RunWith(Parameterized.class)
 public class MastermindTest {
@@ -38,61 +36,61 @@ public class MastermindTest {
         return Arrays.asList(new Object[][]{
                 {
                         "should_return_zero_well_placed_and_zero_misplaced_key_pegs_for_code_red_and_guess_green",
-                        createCode(CodePegType.RED),
-                        createCode(CodePegType.GREEN),
+                        createCode(CodePegColor.RED),
+                        createCode(CodePegColor.GREEN),
                         0,
                         0
                 },
                 {
                         "should_return_one_wellplaced_and_zero_misplaced_for_code_red_and_guess_red",
-                        createCode(CodePegType.RED),
-                        createCode(CodePegType.RED),
+                        createCode(CodePegColor.RED),
+                        createCode(CodePegColor.RED),
                         1,
                         0
                 },
                 {
                         "should_return_two_wellplaced_and_zero_misplaced_for_2_correct_pegs",
-                        createCode(CodePegType.RED, CodePegType.GREEN),
-                        createCode(CodePegType.RED, CodePegType.GREEN),
+                        createCode(CodePegColor.RED, CodePegColor.GREEN),
+                        createCode(CodePegColor.RED, CodePegColor.GREEN),
                         2,
                         0
                 },
                 {
                         "should_return_zero_wellplaced_and_one_misplaced_for_one_misplaced_peg",
-                        createCode(CodePegType.RED, CodePegType.GREEN),
-                        createCode(CodePegType.MAGENTA, CodePegType.RED),
+                        createCode(CodePegColor.RED, CodePegColor.GREEN),
+                        createCode(CodePegColor.MAGENTA, CodePegColor.RED),
                         0,
                         1
                 },
                 {
                         "should_return_zero_wellplaced_and_two_misplaced_for_two_misplaced_pegs",
-                        createCode(CodePegType.WHITE, CodePegType.GREEN),
-                        createCode(CodePegType.GREEN, CodePegType.WHITE),
+                        createCode(CodePegColor.WHITE, CodePegColor.GREEN),
+                        createCode(CodePegColor.GREEN, CodePegColor.WHITE),
                         0,
                         2
                 },
                 {
                         "should_return_one_wellplaced_and_one_misplaced",
-                        createCode(CodePegType.WHITE, CodePegType.GREEN, CodePegType.YELLOW),
-                        createCode(CodePegType.WHITE, CodePegType.YELLOW, CodePegType.MAGENTA),
+                        createCode(CodePegColor.WHITE, CodePegColor.GREEN, CodePegColor.YELLOW),
+                        createCode(CodePegColor.WHITE, CodePegColor.YELLOW, CodePegColor.MAGENTA),
                         1,
                         1
                 },
                 {
                         "should_return_zero_wellplaced_and_one_misplaced_if_colour_matches_multiple_times",
-                        createCode(CodePegType.MAGENTA, CodePegType.MAGENTA, CodePegType.MAGENTA, CodePegType.GREEN),
-                        createCode(CodePegType.RED, CodePegType.RED, CodePegType.RED, CodePegType.MAGENTA),
+                        createCode(CodePegColor.MAGENTA, CodePegColor.MAGENTA, CodePegColor.MAGENTA, CodePegColor.GREEN),
+                        createCode(CodePegColor.RED, CodePegColor.RED, CodePegColor.RED, CodePegColor.MAGENTA),
                         0,
                         1
                 }
         });
     }
 
-    private static Code createCode(CodePegType... codePegTypes) {
+    private static Code createCode(CodePegColor... codePegColors) {
         ArrayList<CodePeg> codePegs = new ArrayList<>();
 
-        for (CodePegType codePegType : codePegTypes) {
-            codePegs.add(new CodePeg(codePegType));
+        for (CodePegColor codePegColor : codePegColors) {
+            codePegs.add(new CodePeg(codePegColor));
         }
         return new Code(codePegs);
     }

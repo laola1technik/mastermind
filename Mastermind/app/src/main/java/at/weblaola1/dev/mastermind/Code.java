@@ -35,7 +35,7 @@ class Code {
     }
 
     private int countMisplacedCodePegs(List<CodePeg> codePegs, List<CodePeg> guessedCodePegs) {
-        List<CodePegType> pegTypes = guessedCodePegs.stream().map(CodePeg::getType)
+        List<CodePegColor> pegTypes = guessedCodePegs.stream().map(CodePeg::getType)
                 .collect(Collectors.toList());
 
         return (int) codePegs.stream()
@@ -43,7 +43,7 @@ class Code {
                 .count();
     }
 
-    private boolean removedMisplacedPeg(List<CodePegType> pegTypes, CodePegType pegType) {
+    private boolean removedMisplacedPeg(List<CodePegColor> pegTypes, CodePegColor pegType) {
         int pegTypeIndex = pegTypes.indexOf(pegType);
         if (pegTypeIndex > -1) {
             pegTypes.remove(pegTypeIndex);

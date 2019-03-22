@@ -1,6 +1,6 @@
 package at.weblaola1.dev.mastermind;
 
-public enum CodePegType {
+public enum CodePegColor {
     RED,
     GREEN,
     MAGENTA,

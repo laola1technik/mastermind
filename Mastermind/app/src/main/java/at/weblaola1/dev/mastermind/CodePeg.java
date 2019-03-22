@@ -1,9 +1,9 @@
 package at.weblaola1.dev.mastermind;
 
 class CodePeg {
-    private CodePegType type;
+    private CodePegColor type;
 
-    CodePeg(CodePegType type) {
+    CodePeg(CodePegColor type) {
         this.type = type;
     }
 
@@ -12,7 +12,7 @@ class CodePeg {
         return type == ((CodePeg)obj).type;
     }
 
-    public CodePegType getType() {
+    public CodePegColor getType() {
         return type;
     }
 }

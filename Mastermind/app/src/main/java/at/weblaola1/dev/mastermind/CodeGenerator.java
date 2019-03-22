@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 class CodeGenerator {
-    private List<CodePegType> types;
+    private List<CodePegColor> types;
 
-    CodeGenerator(CodePegType... types) {
+    CodeGenerator(CodePegColor... types) {
         this.types = Arrays.asList(types);
     }
 
