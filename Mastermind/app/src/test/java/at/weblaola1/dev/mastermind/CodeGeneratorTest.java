@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
@@ -34,11 +33,11 @@ public class CodeGeneratorTest {
     @Test
     public void should_create_all_codes() {
         // TODO refactor toArray()
-        CodeGenerator codeGenerator = new CodeGenerator(colors.toArray(new CodePegColor[]{}));
+        CodeGenerator codeGenerator = new CodeGenerator(colors);
 
-        List<Code> allPossibleCodes = codeGenerator.createAllCodes(pegCount);
-
-        assertThat(allPossibleCodes, hasItems(expectedCodes.toArray(new Code[]{})));
+        Set<Code> allPossibleCodes = codeGenerator.createAllCodes(pegCount);
+        //TODO assert equality of Sets
+        assertThat(allPossibleCodes, hasItems(expectedCodes));
     }
 
     @Parameterized.Parameters(name = "{0}")

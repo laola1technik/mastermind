@@ -1,29 +1,28 @@
 package at.weblaola1.dev.mastermind;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 class CodeGenerator {
-    private List<CodePegColor> colors;
+    private Set<CodePegColor> colors;
 
-    CodeGenerator(CodePegColor... colors) {
-        this.colors = Arrays.asList(colors);
+    CodeGenerator(Set<CodePegColor> colors) {
+        this.colors = colors;
     }
 
-    List<Code> createAllCodes(int codePegCount) {
+    Set<Code> createAllCodes(int codePegCount) {
+        Set<Code> codes = new HashSet<>();
 
-        List<Code> codes = new ArrayList<>();
-
-        for (int j = 0; j < colors.size(); j++) {
+        colors.forEach(codePegColor -> {
             List<CodePeg> codePegList = new ArrayList<>();
 
             for (int i = 0; i < codePegCount; i++) {
-                codePegList.add(new CodePeg(colors.get(j)));
+                codePegList.add(new CodePeg(codePegColor));
             }
             codes.add(new Code(codePegList));
-        }
-
+        });
         return codes;
     }
 }
