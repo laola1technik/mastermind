@@ -4,29 +4,29 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
 import static at.weblaola1.dev.mastermind.CodePegColor.GREEN;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertThat;
 
 public class CodeGeneratorTest {
     @Test
-    public void should_create_codes_for_one_blue_codePeg() {
+    public void should_create_codes_for_one_peg_and_one_color() {
         int codePegCount = 1;
         CodeGenerator codeGenerator = new CodeGenerator(BLUE);
 
         List<Code> allPossibleCodes = codeGenerator.createAllCodes(codePegCount);
 
-        Code expectedCode = new Code(Collections.singletonList(blueCodePeg()));
+        Code expectedCode = new Code(singletonList(blueCodePeg()));
         assertThat(allPossibleCodes, hasItems(expectedCode));
     }
 
     @Test
-    public void should_create_codes_for_two_green_codePegs() {
+    public void should_create_all_codes_for_two_pegs_and_one_color() {
         int codePegCount = 2;
         CodeGenerator codeGenerator = new CodeGenerator(GREEN);
 
@@ -40,15 +40,15 @@ public class CodeGeneratorTest {
     }
 
     @Test
-    public void should_create_two_codes_for_two_colors() {
+    public void should_create_all_codes_for_one_peg_and_two_colors() {
         int codePegCount = 1;
         CodeGenerator codeGenerator = new CodeGenerator(GREEN, BLUE);
 
         List<Code> allPossibleCodes = codeGenerator.createAllCodes(codePegCount);
 
         assertThat(allPossibleCodes, hasItems(
-                new Code(asList(greenCodePeg())),
-                new Code(asList(blueCodePeg())))
+                new Code(singletonList(greenCodePeg())),
+                new Code(singletonList(blueCodePeg())))
         );
     }
 
