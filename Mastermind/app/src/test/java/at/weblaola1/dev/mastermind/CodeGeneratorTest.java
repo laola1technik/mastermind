@@ -3,53 +3,71 @@ package at.weblaola1.dev.mastermind;
 import android.support.annotation.NonNull;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
 import static at.weblaola1.dev.mastermind.CodePegColor.GREEN;
 import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertThat;
 
+@RunWith(Parameterized.class)
 public class CodeGeneratorTest {
-    @Test
-    public void should_create_codes_for_one_peg_and_one_color() {
-        int codePegCount = 1;
-        CodeGenerator codeGenerator = new CodeGenerator(BLUE);
+    private int pegCount;
+    private Set<CodePegColor> colors;
+    private Set<Code> expectedCodes;
 
-        List<Code> allPossibleCodes = codeGenerator.createAllCodes(codePegCount);
-
-        Code expectedCode = new Code(singletonList(blueCodePeg()));
-        assertThat(allPossibleCodes, hasItems(expectedCode));
+    public CodeGeneratorTest(String testName, int pegCount, Set<CodePegColor> colors, Set<Code> expectedCodes) {
+        this.pegCount = pegCount;
+        this.colors = colors;
+        this.expectedCodes = expectedCodes;
     }
 
     @Test
-    public void should_create_all_codes_for_two_pegs_and_one_color() {
-        int codePegCount = 2;
-        CodeGenerator codeGenerator = new CodeGenerator(GREEN);
+    public void should_create_all_codes() {
+        // TODO refactor toArray()
+        CodeGenerator codeGenerator = new CodeGenerator(colors.toArray(new CodePegColor[]{}));
 
-        List<Code> allPossibleCodes = codeGenerator.createAllCodes(codePegCount);
+        List<Code> allPossibleCodes = codeGenerator.createAllCodes(pegCount);
 
-        Code expectedCode = new Code(asList(
-                greenCodePeg(),
-                greenCodePeg()
-        ));
-        assertThat(allPossibleCodes, hasItems(expectedCode));
+        assertThat(allPossibleCodes, hasItems(expectedCodes.toArray(new Code[]{})));
     }
 
-    @Test
-    public void should_create_all_codes_for_one_peg_and_two_colors() {
-        int codePegCount = 1;
-        CodeGenerator codeGenerator = new CodeGenerator(GREEN, BLUE);
+    @Parameterized.Parameters(name = "{0}")
+    public static Iterable<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {
+                        "should create codes for one peg and one color",
+                        1,
+                        EnumSet.of(GREEN),
+                        createCodeSet(createCode(GREEN))
+                },
+                {
+                        "should create all codes for two pegs and one color",
+                        2,
+                        EnumSet.of(GREEN),
+                        createCodeSet(createCode(GREEN, GREEN))
+                },
+                {
+                        "should create all codes for one peg and two colors",
+                        1,
+                        EnumSet.of(GREEN, BLUE),
+                        createCodeSet(createCode(GREEN), createCode(BLUE))
+                }
+        });
+    }
 
-        List<Code> allPossibleCodes = codeGenerator.createAllCodes(codePegCount);
-
-        assertThat(allPossibleCodes, hasItems(
-                new Code(singletonList(greenCodePeg())),
-                new Code(singletonList(blueCodePeg())))
-        );
+    @NonNull
+    private static HashSet<Code> createCodeSet(Code... codes) {
+        return new HashSet<>(asList(codes));
     }
 
     @NonNull
@@ -58,7 +76,16 @@ public class CodeGeneratorTest {
     }
 
     @NonNull
-    private CodePeg greenCodePeg() {
+    private static CodePeg greenCodePeg() {
         return new CodePeg(GREEN);
+    }
+
+    private static Code createCode(CodePegColor... codePegColors) {
+        ArrayList<CodePeg> codePegs = new ArrayList<>();
+
+        for (CodePegColor codePegColor : codePegColors) {
+            codePegs.add(new CodePeg(codePegColor));
+        }
+        return new Code(codePegs);
     }
 }
