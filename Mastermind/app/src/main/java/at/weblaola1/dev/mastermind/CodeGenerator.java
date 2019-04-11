@@ -5,21 +5,21 @@ import java.util.Arrays;
 import java.util.List;
 
 class CodeGenerator {
-    private List<CodePegColor> types;
+    private List<CodePegColor> colors;
 
-    CodeGenerator(CodePegColor... types) {
-        this.types = Arrays.asList(types);
+    CodeGenerator(CodePegColor... colors) {
+        this.colors = Arrays.asList(colors);
     }
 
     List<Code> createAllCodes(int codePegCount) {
 
         List<Code> codes = new ArrayList<>();
 
-        for (int j = 0; j < types.size(); j++) {
+        for (int j = 0; j < colors.size(); j++) {
             List<CodePeg> codePegList = new ArrayList<>();
 
             for (int i = 0; i < codePegCount; i++) {
-                codePegList.add(new CodePeg(types.get(j)));
+                codePegList.add(new CodePeg(colors.get(j)));
             }
             codes.add(new Code(codePegList));
         }
