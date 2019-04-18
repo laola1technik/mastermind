@@ -1,5 +1,7 @@
 package at.weblaola1.dev.mastermind;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -63,5 +65,11 @@ class Code {
     @Override
     public int hashCode() {
         return Objects.hash(codePegs);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Code{" + codePegs + '}';
     }
 }

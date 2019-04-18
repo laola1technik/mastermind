@@ -1,5 +1,7 @@
 package at.weblaola1.dev.mastermind;
 
+import android.support.annotation.NonNull;
+
 class CodePeg {
     private CodePegColor type;
 
@@ -9,10 +11,19 @@ class CodePeg {
 
     @Override
     public boolean equals(Object obj) {
-        return type == ((CodePeg)obj).type;
+        if (obj instanceof CodePeg) {
+            return type == ((CodePeg) obj).type;
+        }
+        return false;
     }
 
-    public CodePegColor getType() {
+    CodePegColor getType() {
         return type;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return type.toString();
     }
 }
