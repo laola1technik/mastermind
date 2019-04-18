@@ -3,6 +3,7 @@ package at.weblaola1.dev.mastermind;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -12,6 +13,13 @@ class Code {
 
     Code(List<CodePeg> codePegs) {
         this.codePegs = codePegs;
+    }
+
+    public static Code fromColors(CodePegColor... colors) {
+        List<CodePeg> codePegs = new ArrayList<>();
+        Arrays.stream(colors).forEach(color -> codePegs.add(new CodePeg(color)));
+
+        return new Code(codePegs);
     }
 
     CompareResult compareWith(Code guessedCode) {
@@ -71,5 +79,13 @@ class Code {
     @Override
     public String toString() {
         return "Code{" + codePegs + '}';
+    }
+
+    public void append(CodePegColor codePegColor) {
+        this.codePegs.add(new CodePeg(codePegColor));
+    }
+
+    public Code deepCopy() {
+        return new Code(codePegs.stream().map(codePeg -> (CodePeg) codePeg.deepCopy()).collect(Collectors.toList()));
     }
 }

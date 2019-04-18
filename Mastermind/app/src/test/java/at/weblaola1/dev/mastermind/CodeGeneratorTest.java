@@ -31,7 +31,6 @@ public class CodeGeneratorTest {
 
     @Test
     public void should_create_all_codes() {
-        // TODO refactor toArray()
         CodeGenerator codeGenerator = new CodeGenerator(colors);
 
         Set<Code> allPossibleCodes = codeGenerator.createAllCodes(pegCount);
@@ -59,6 +58,17 @@ public class CodeGeneratorTest {
                         1,
                         EnumSet.of(GREEN, BLUE),
                         createCodeSet(createCode(GREEN), createCode(BLUE))
+                },
+                {
+                        "should create all codes for two peg and two colors",
+                        2,
+                        EnumSet.of(GREEN, BLUE),
+                        createCodeSet(
+                                createCode(GREEN, GREEN),
+                                createCode(GREEN, BLUE),
+                                createCode(BLUE, GREEN),
+                                createCode(BLUE, BLUE)
+                        )
                 }
         });
     }

@@ -1,8 +1,6 @@
 package at.weblaola1.dev.mastermind;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 class CodeGenerator {
@@ -13,16 +11,23 @@ class CodeGenerator {
     }
 
     Set<Code> createAllCodes(int codePegCount) {
-        Set<Code> codes = new HashSet<>();
+        Set<Code> result = new HashSet<>();
 
-        colors.forEach(codePegColor -> {
-            List<CodePeg> codePegList = new ArrayList<>();
+        Set<Code> finalResult = result;
+        colors.forEach(codePegColor -> finalResult.add(Code.fromColors(codePegColor)));
 
-            for (int i = 0; i < codePegCount; i++) {
-                codePegList.add(new CodePeg(codePegColor));
+        for (int i = 1; i < codePegCount; i++) {
+            Set<Code> newResult = new HashSet<>();
+            for (Code code : result) {
+                colors.forEach(codePegColor -> {
+                    Code copiedCode = code.deepCopy();
+                    copiedCode.append(codePegColor);
+                    newResult.add(copiedCode);
+                });
             }
-            codes.add(new Code(codePegList));
-        });
-        return codes;
+            result = newResult;
+        }
+
+        return result;
     }
 }
