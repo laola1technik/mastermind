@@ -15,8 +15,7 @@ import java.util.Set;
 import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
 import static at.weblaola1.dev.mastermind.CodePegColor.GREEN;
 import static java.util.Arrays.asList;
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Parameterized.class)
 public class CodeGeneratorTest {
@@ -36,8 +35,8 @@ public class CodeGeneratorTest {
         CodeGenerator codeGenerator = new CodeGenerator(colors);
 
         Set<Code> allPossibleCodes = codeGenerator.createAllCodes(pegCount);
-        //TODO assert equality of Sets
-        assertThat(allPossibleCodes, hasItems(expectedCodes));
+
+        assertThat(allPossibleCodes).containsExactlyInAnyOrder(expectedCodes.toArray(new Code[]{}));
     }
 
     @Parameterized.Parameters(name = "{0}")
