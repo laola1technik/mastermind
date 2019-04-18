@@ -1,5 +1,7 @@
 package at.weblaola1.dev.mastermind;
 
+import android.support.annotation.NonNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,21 +15,23 @@ class CodeGenerator {
     Set<Code> createAllCodes(int codePegCount) {
         Set<Code> result = new HashSet<>();
 
-        Set<Code> finalResult = result;
-        colors.forEach(codePegColor -> finalResult.add(Code.fromColors(codePegColor)));
+        colors.forEach(codePegColor -> result.add(Code.fromColors(codePegColor)));
 
-        for (int i = 1; i < codePegCount; i++) {
-            Set<Code> newResult = new HashSet<>();
-            for (Code code : result) {
-                colors.forEach(codePegColor -> {
-                    Code copiedCode = code.deepCopy();
-                    copiedCode.append(codePegColor);
-                    newResult.add(copiedCode);
-                });
-            }
-            result = newResult;
+        return createCombinations(result, codePegCount);
+    }
+
+    @NonNull
+    private Set<Code> createCombinations(Set<Code> result, int codePegCount) {
+        if (codePegCount <= 1) {
+            return result;
         }
-
-        return result;
+        Set<Code> newResult = new HashSet<>();
+        result.forEach(code -> {
+            colors.forEach(codePegColor -> {
+                Code copiedCode = Code.fromCodeAndColor(code, codePegColor);
+                newResult.add(copiedCode);
+            });
+        });
+        return createCombinations(newResult, codePegCount - 1);
     }
 }

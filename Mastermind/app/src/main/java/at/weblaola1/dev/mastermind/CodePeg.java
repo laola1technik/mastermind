@@ -26,8 +26,4 @@ class CodePeg {
     public String toString() {
         return type.toString();
     }
-
-    public Object deepCopy() {
-        return new CodePeg(this.getType());
-    }
 }

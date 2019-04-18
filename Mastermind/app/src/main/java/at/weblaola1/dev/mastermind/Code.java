@@ -15,11 +15,17 @@ class Code {
         this.codePegs = codePegs;
     }
 
-    public static Code fromColors(CodePegColor... colors) {
+    static Code fromColors(CodePegColor... colors) {
         List<CodePeg> codePegs = new ArrayList<>();
         Arrays.stream(colors).forEach(color -> codePegs.add(new CodePeg(color)));
 
         return new Code(codePegs);
+    }
+
+    static Code fromCodeAndColor(Code code, CodePegColor codePegColor) {
+        List<CodePeg> codePegsCopy = new ArrayList<>(code.codePegs);
+        codePegsCopy.add(new CodePeg(codePegColor));
+        return new Code(codePegsCopy);
     }
 
     CompareResult compareWith(Code guessedCode) {
@@ -79,13 +85,5 @@ class Code {
     @Override
     public String toString() {
         return "Code{" + codePegs + '}';
-    }
-
-    public void append(CodePegColor codePegColor) {
-        this.codePegs.add(new CodePeg(codePegColor));
-    }
-
-    public Code deepCopy() {
-        return new Code(codePegs.stream().map(codePeg -> (CodePeg) codePeg.deepCopy()).collect(Collectors.toList()));
     }
 }
