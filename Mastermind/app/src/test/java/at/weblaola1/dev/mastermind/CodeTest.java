@@ -10,7 +10,7 @@ import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
 import static at.weblaola1.dev.mastermind.CodePegColor.MAGENTA;
 import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
 
-public class CodeSetTest {
+public class CodeTest {
     @Test
     public void should_not_add_same_code_twice() {
         Code code = createCode(BLUE, MAGENTA);
@@ -29,5 +29,14 @@ public class CodeSetTest {
         Code sameCode = createCode(BLUE, MAGENTA);
 
         Assert.assertEquals(code, sameCode);
+    }
+
+    @Test
+    public void should_create_code_from_colors() {
+        CodePegColor[] codePegColors = {BLUE, MAGENTA};
+
+        Code code = Code.fromColors(codePegColors);
+
+        Assert.assertEquals(code, createCode(codePegColors));
     }
 }
