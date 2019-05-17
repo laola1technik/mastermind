@@ -2,6 +2,8 @@ package at.weblaola1.dev.mastermind;
 
 import android.support.annotation.NonNull;
 
+import java.util.Objects;
+
 class CodePeg {
     private CodePegColor type;
 
@@ -25,5 +27,10 @@ class CodePeg {
     @Override
     public String toString() {
         return type.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type);
     }
 }
