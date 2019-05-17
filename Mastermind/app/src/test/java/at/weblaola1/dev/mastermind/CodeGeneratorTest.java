@@ -60,7 +60,7 @@ public class CodeGeneratorTest {
                         createCodeSet(createCode(GREEN), createCode(BLUE))
                 },
                 {
-                        "should create all codes for two peg and two colors",
+                        "should create all codes for two pegs and two colors",
                         2,
                         EnumSet.of(GREEN, BLUE),
                         createCodeSet(
