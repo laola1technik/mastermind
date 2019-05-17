@@ -8,14 +8,15 @@ import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
 import static at.weblaola1.dev.mastermind.CodePegColor.MAGENTA;
+import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
 
 public class CodeSetTest {
     @Test
     public void should_not_add_same_code_twice() {
-        Code code = Code.fromColors(BLUE, MAGENTA);
-        Code sameCode = Code.fromColors(BLUE, MAGENTA);
-
+        Code code = createCode(BLUE, MAGENTA);
+        Code sameCode = createCode(BLUE, MAGENTA);
         Set<Code> codeSet = new HashSet<>();
+
         codeSet.add(code);
         codeSet.add(sameCode);
 
@@ -24,8 +25,8 @@ public class CodeSetTest {
 
     @Test
     public void should_validate_that_codes_are_equal() {
-        Code code = Code.fromColors(BLUE, MAGENTA);
-        Code sameCode = Code.fromColors(BLUE, MAGENTA);
+        Code code = createCode(BLUE, MAGENTA);
+        Code sameCode = createCode(BLUE, MAGENTA);
 
         Assert.assertEquals(code, sameCode);
     }

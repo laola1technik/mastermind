@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -14,6 +13,7 @@ import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
 import static at.weblaola1.dev.mastermind.CodePegColor.GREEN;
+import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -76,24 +76,5 @@ public class CodeGeneratorTest {
     @NonNull
     private static HashSet<Code> createCodeSet(Code... codes) {
         return new HashSet<>(asList(codes));
-    }
-
-    @NonNull
-    private CodePeg blueCodePeg() {
-        return new CodePeg(BLUE);
-    }
-
-    @NonNull
-    private static CodePeg greenCodePeg() {
-        return new CodePeg(GREEN);
-    }
-
-    private static Code createCode(CodePegColor... codePegColors) {
-        ArrayList<CodePeg> codePegs = new ArrayList<>();
-
-        for (CodePegColor codePegColor : codePegColors) {
-            codePegs.add(new CodePeg(codePegColor));
-        }
-        return new Code(codePegs);
     }
 }

@@ -5,8 +5,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+
+import static at.weblaola1.dev.mastermind.CodePegColor.GREEN;
+import static at.weblaola1.dev.mastermind.CodePegColor.MAGENTA;
+import static at.weblaola1.dev.mastermind.CodePegColor.RED;
+import static at.weblaola1.dev.mastermind.CodePegColor.WHITE;
+import static at.weblaola1.dev.mastermind.CodePegColor.YELLOW;
+import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
 
 @RunWith(Parameterized.class)
 public class MastermindTest {
@@ -36,63 +42,53 @@ public class MastermindTest {
         return Arrays.asList(new Object[][]{
                 {
                         "should_return_zero_well_placed_and_zero_misplaced_key_pegs_for_code_red_and_guess_green",
-                        createCode(CodePegColor.RED),
-                        createCode(CodePegColor.GREEN),
+                        createCode(RED),
+                        createCode(GREEN),
                         0,
                         0
                 },
                 {
                         "should_return_one_wellplaced_and_zero_misplaced_for_code_red_and_guess_red",
-                        createCode(CodePegColor.RED),
-                        createCode(CodePegColor.RED),
+                        createCode(RED),
+                        createCode(RED),
                         1,
                         0
                 },
                 {
                         "should_return_two_wellplaced_and_zero_misplaced_for_2_correct_pegs",
-                        createCode(CodePegColor.RED, CodePegColor.GREEN),
-                        createCode(CodePegColor.RED, CodePegColor.GREEN),
+                        createCode(RED, GREEN),
+                        createCode(RED, GREEN),
                         2,
                         0
                 },
                 {
                         "should_return_zero_wellplaced_and_one_misplaced_for_one_misplaced_peg",
-                        createCode(CodePegColor.RED, CodePegColor.GREEN),
-                        createCode(CodePegColor.MAGENTA, CodePegColor.RED),
+                        createCode(RED, GREEN),
+                        createCode(MAGENTA, RED),
                         0,
                         1
                 },
                 {
                         "should_return_zero_wellplaced_and_two_misplaced_for_two_misplaced_pegs",
-                        createCode(CodePegColor.WHITE, CodePegColor.GREEN),
-                        createCode(CodePegColor.GREEN, CodePegColor.WHITE),
+                        createCode(WHITE, GREEN),
+                        createCode(GREEN, WHITE),
                         0,
                         2
                 },
                 {
                         "should_return_one_wellplaced_and_one_misplaced",
-                        createCode(CodePegColor.WHITE, CodePegColor.GREEN, CodePegColor.YELLOW),
-                        createCode(CodePegColor.WHITE, CodePegColor.YELLOW, CodePegColor.MAGENTA),
+                        createCode(WHITE, GREEN, YELLOW),
+                        createCode(WHITE, YELLOW, MAGENTA),
                         1,
                         1
                 },
                 {
                         "should_return_zero_wellplaced_and_one_misplaced_if_colour_matches_multiple_times",
-                        createCode(CodePegColor.MAGENTA, CodePegColor.MAGENTA, CodePegColor.MAGENTA, CodePegColor.GREEN),
-                        createCode(CodePegColor.RED, CodePegColor.RED, CodePegColor.RED, CodePegColor.MAGENTA),
+                        createCode(MAGENTA, MAGENTA, MAGENTA, GREEN),
+                        createCode(RED, RED, RED, MAGENTA),
                         0,
                         1
                 }
         });
     }
-
-    private static Code createCode(CodePegColor... codePegColors) {
-        ArrayList<CodePeg> codePegs = new ArrayList<>();
-
-        for (CodePegColor codePegColor : codePegColors) {
-            codePegs.add(new CodePeg(codePegColor));
-        }
-        return new Code(codePegs);
-    }
-
 }
