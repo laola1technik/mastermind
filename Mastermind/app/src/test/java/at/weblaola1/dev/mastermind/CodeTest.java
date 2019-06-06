@@ -8,14 +8,12 @@ import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePeg.BLUE;
 import static at.weblaola1.dev.mastermind.CodePeg.MAGENTA;
-import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
-import static java.util.Arrays.asList;
 
 public class CodeTest {
     @Test
     public void should_not_add_same_code_twice() {
-        Code code = createCode(BLUE, MAGENTA);
-        Code sameCode = createCode(BLUE, MAGENTA);
+        Code code = new Code(BLUE, MAGENTA);
+        Code sameCode = new Code(BLUE, MAGENTA);
         Set<Code> codeSet = new HashSet<>();
 
         codeSet.add(code);
@@ -26,8 +24,8 @@ public class CodeTest {
 
     @Test
     public void should_validate_that_codes_are_equal() {
-        Code code = createCode(BLUE, MAGENTA);
-        Code sameCode = createCode(BLUE, MAGENTA);
+        Code code = new Code(BLUE, MAGENTA);
+        Code sameCode = new Code(BLUE, MAGENTA);
 
         Assert.assertEquals(code, sameCode);
     }
@@ -36,8 +34,8 @@ public class CodeTest {
     public void should_create_code_from_pegs() {
         CodePeg[] codePegs = {BLUE, MAGENTA};
 
-        Code code = new Code(asList(codePegs));
+        Code code = new Code(codePegs);
 
-        Assert.assertEquals(code, createCode(codePegs));
+        Assert.assertEquals(code, new Code(codePegs));
     }
 }

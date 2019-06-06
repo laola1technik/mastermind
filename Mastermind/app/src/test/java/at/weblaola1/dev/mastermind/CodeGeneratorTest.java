@@ -13,7 +13,6 @@ import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePeg.BLUE;
 import static at.weblaola1.dev.mastermind.CodePeg.GREEN;
-import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,29 +44,29 @@ public class CodeGeneratorTest {
                         "should create codes for code length one and one peg",
                         1,
                         EnumSet.of(GREEN),
-                        createCodeSet(createCode(GREEN))
+                        createCodeSet(new Code(GREEN))
                 },
                 {
                         "should create all codes for code length two and one peg",
                         2,
                         EnumSet.of(GREEN),
-                        createCodeSet(createCode(GREEN, GREEN))
+                        createCodeSet(new Code(GREEN, GREEN))
                 },
                 {
                         "should create all codes for code length one and two pegs",
                         1,
                         EnumSet.of(GREEN, BLUE),
-                        createCodeSet(createCode(GREEN), createCode(BLUE))
+                        createCodeSet(new Code(GREEN), new Code(BLUE))
                 },
                 {
                         "should create all codes for code length two and two pegs",
                         2,
                         EnumSet.of(GREEN, BLUE),
                         createCodeSet(
-                                createCode(GREEN, GREEN),
-                                createCode(GREEN, BLUE),
-                                createCode(BLUE, GREEN),
-                                createCode(BLUE, BLUE)
+                                new Code(GREEN, GREEN),
+                                new Code(GREEN, BLUE),
+                                new Code(BLUE, GREEN),
+                                new Code(BLUE, BLUE)
                         )
                 }
         });

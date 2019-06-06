@@ -2,7 +2,6 @@ package at.weblaola1.dev.mastermind;
 
 import android.support.annotation.NonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ class CodeGenerator {
     Set<Code> createAllCodes(int codePegCount) {
         Set<Code> result = new HashSet<>();
 
-        pegs.forEach(codePeg -> result.add(new Code(Collections.singletonList(codePeg))));
+        pegs.forEach(codePeg -> result.add(new Code(codePeg)));
 
         return createCombinations(result, codePegCount);
     }

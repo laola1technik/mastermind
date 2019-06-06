@@ -3,13 +3,18 @@ package at.weblaola1.dev.mastermind;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 class Code {
     private List<CodePeg> codePegs;
 
-    Code(List<CodePeg> codePegs) {
+    Code(CodePeg... codePegs) {
+        this.codePegs = Arrays.asList(codePegs);
+    }
+
+    private Code(List<CodePeg> codePegs) {
         this.codePegs = codePegs;
     }
 
