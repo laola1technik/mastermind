@@ -1,5 +1,9 @@
 TODOs
-Add more test cases
+step 2 (start with two pairs (XXYY) )
+step 3 (compare codes (start guess code))
+step 4 if 4 well placed -> done
+step 5 compare all possible codes (mit start guess); if result != first result -> delete from all possible codes
+step 6 min/max
 
 AI algorithm
 https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm#mastermind-five-guess-algorithm
