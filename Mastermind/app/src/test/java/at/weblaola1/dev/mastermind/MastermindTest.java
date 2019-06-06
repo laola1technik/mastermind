@@ -7,11 +7,11 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
-import static at.weblaola1.dev.mastermind.CodePegColor.GREEN;
-import static at.weblaola1.dev.mastermind.CodePegColor.MAGENTA;
-import static at.weblaola1.dev.mastermind.CodePegColor.RED;
-import static at.weblaola1.dev.mastermind.CodePegColor.WHITE;
-import static at.weblaola1.dev.mastermind.CodePegColor.YELLOW;
+import static at.weblaola1.dev.mastermind.CodePeg.GREEN;
+import static at.weblaola1.dev.mastermind.CodePeg.MAGENTA;
+import static at.weblaola1.dev.mastermind.CodePeg.RED;
+import static at.weblaola1.dev.mastermind.CodePeg.WHITE;
+import static at.weblaola1.dev.mastermind.CodePeg.YELLOW;
 import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
 
 @RunWith(Parameterized.class)

@@ -6,59 +6,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static java.util.Arrays.asList;
-
 class Code {
-    private List<CodePegColor> codePegColors;
+    private List<CodePeg> codePegs;
 
-    Code(List<CodePegColor> codePegColors) {
-        this.codePegColors = codePegColors;
+    Code(List<CodePeg> codePegs) {
+        this.codePegs = codePegs;
     }
 
-    static Code fromColors(CodePegColor... colors) {
-        // TODO: remove this
-        return new Code(asList(colors));
-    }
-
-    // TODO remove static function and make it code.addPeg(CodePegColor codePegColor)
-    static Code fromCodeAndColor(Code code, CodePegColor codePegColor) {
-        List<CodePegColor> codePegColorsCopy = new ArrayList<>(code.codePegColors);
-        codePegColorsCopy.add(codePegColor);
-        return new Code(codePegColorsCopy);
+    static Code fromCodeAndPeg(Code code, CodePeg codePeg) {
+        List<CodePeg> codePegsCopy = new ArrayList<>(code.codePegs);
+        codePegsCopy.add(codePeg);
+        return new Code(codePegsCopy);
     }
 
     CompareResult compareWith(Code guessedCode) {
-        List<CodePegColor> remainingCodePegColors = new ArrayList<>(codePegColors);
-        List<CodePegColor> remainingGuessedCodePegs = new ArrayList<>(guessedCode.codePegColors);
+        List<CodePeg> remainingCodePegs = new ArrayList<>(codePegs);
+        List<CodePeg> remainingGuessedCodePegs = new ArrayList<>(guessedCode.codePegs);
         CompareResult compareResult = new CompareResult();
 
-        removeWellPlacedPegs(remainingCodePegColors, remainingGuessedCodePegs);
+        removeWellPlacedPegs(remainingCodePegs, remainingGuessedCodePegs);
 
-        compareResult.setNumberOfWellPlaced(codePegColors.size() - remainingCodePegColors.size());
-        compareResult.setNumberOfMisplaced(countMisplacedCodePegs(remainingCodePegColors, remainingGuessedCodePegs));
+        compareResult.setNumberOfWellPlaced(codePegs.size() - remainingCodePegs.size());
+        compareResult.setNumberOfMisplaced(countMisplacedCodePegs(remainingCodePegs, remainingGuessedCodePegs));
 
         return compareResult;
     }
 
-    private void removeWellPlacedPegs(List<CodePegColor> codePegColors, List<CodePegColor> guessedCodePegColors) {
-        for (int codePegColorIndex = this.codePegColors.size() - 1; codePegColorIndex >= 0; codePegColorIndex--) {
-            if (this.codePegColors.get(codePegColorIndex).equals(guessedCodePegColors.get(codePegColorIndex))) {
-                codePegColors.remove(codePegColorIndex);
-                guessedCodePegColors.remove(codePegColorIndex);
+    private void removeWellPlacedPegs(List<CodePeg> codePegs, List<CodePeg> guessedCodePegs) {
+        for (int codePegIndex = this.codePegs.size() - 1; codePegIndex >= 0; codePegIndex--) {
+            if (this.codePegs.get(codePegIndex).equals(guessedCodePegs.get(codePegIndex))) {
+                codePegs.remove(codePegIndex);
+                guessedCodePegs.remove(codePegIndex);
             }
         }
     }
 
-    private int countMisplacedCodePegs(List<CodePegColor> codePegColors, List<CodePegColor> guessedCodePegColors) {
-        return (int) codePegColors.stream()
-                .filter(codePegColor -> removedMisplacedPeg(guessedCodePegColors, codePegColor))
+    private int countMisplacedCodePegs(List<CodePeg> codePegs, List<CodePeg> guessedCodePegs) {
+        return (int) codePegs.stream()
+                .filter(codePeg -> removedMisplacedPeg(guessedCodePegs, codePeg))
                 .count();
     }
 
-    private boolean removedMisplacedPeg(List<CodePegColor> pegColors, CodePegColor pegColor) {
-        int pegTypeIndex = pegColors.indexOf(pegColor);
+    private boolean removedMisplacedPeg(List<CodePeg> pegs, CodePeg peg) {
+        int pegTypeIndex = pegs.indexOf(peg);
         if (pegTypeIndex > -1) {
-            pegColors.remove(pegTypeIndex);
+            pegs.remove(pegTypeIndex);
             return true;
         }
         return false;
@@ -69,17 +61,17 @@ class Code {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Code code = (Code) o;
-        return Objects.equals(codePegColors, code.codePegColors);
+        return Objects.equals(codePegs, code.codePegs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(codePegColors);
+        return Objects.hash(codePegs);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Code{" + codePegColors + '}';
+        return "Code{" + codePegs + '}';
     }
 }

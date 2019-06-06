@@ -11,8 +11,8 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
-import static at.weblaola1.dev.mastermind.CodePegColor.GREEN;
+import static at.weblaola1.dev.mastermind.CodePeg.BLUE;
+import static at.weblaola1.dev.mastermind.CodePeg.GREEN;
 import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,18 +20,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(Parameterized.class)
 public class CodeGeneratorTest {
     private int pegCount;
-    private Set<CodePegColor> colors;
+    private Set<CodePeg> pegs;
     private Set<Code> expectedCodes;
 
-    public CodeGeneratorTest(String testName, int pegCount, Set<CodePegColor> colors, Set<Code> expectedCodes) {
+    public CodeGeneratorTest(String testName, int pegCount, Set<CodePeg> pegs, Set<Code> expectedCodes) {
         this.pegCount = pegCount;
-        this.colors = colors;
+        this.pegs = pegs;
         this.expectedCodes = expectedCodes;
     }
 
     @Test
     public void should_create_all_codes() {
-        CodeGenerator codeGenerator = new CodeGenerator(colors);
+        CodeGenerator codeGenerator = new CodeGenerator(pegs);
 
         Set<Code> allPossibleCodes = codeGenerator.createAllCodes(pegCount);
 
@@ -42,25 +42,25 @@ public class CodeGeneratorTest {
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {
-                        "should create codes for one peg and one color",
+                        "should create codes for code length one and one peg",
                         1,
                         EnumSet.of(GREEN),
                         createCodeSet(createCode(GREEN))
                 },
                 {
-                        "should create all codes for two pegs and one color",
+                        "should create all codes for code length two and one peg",
                         2,
                         EnumSet.of(GREEN),
                         createCodeSet(createCode(GREEN, GREEN))
                 },
                 {
-                        "should create all codes for one peg and two colors",
+                        "should create all codes for code length one and two pegs",
                         1,
                         EnumSet.of(GREEN, BLUE),
                         createCodeSet(createCode(GREEN), createCode(BLUE))
                 },
                 {
-                        "should create all codes for two pegs and two colors",
+                        "should create all codes for code length two and two pegs",
                         2,
                         EnumSet.of(GREEN, BLUE),
                         createCodeSet(

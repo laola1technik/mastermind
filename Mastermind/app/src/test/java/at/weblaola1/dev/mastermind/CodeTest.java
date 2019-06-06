@@ -6,9 +6,10 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import static at.weblaola1.dev.mastermind.CodePegColor.BLUE;
-import static at.weblaola1.dev.mastermind.CodePegColor.MAGENTA;
+import static at.weblaola1.dev.mastermind.CodePeg.BLUE;
+import static at.weblaola1.dev.mastermind.CodePeg.MAGENTA;
 import static at.weblaola1.dev.mastermind.TestCodeProvider.createCode;
+import static java.util.Arrays.asList;
 
 public class CodeTest {
     @Test
@@ -32,11 +33,11 @@ public class CodeTest {
     }
 
     @Test
-    public void should_create_code_from_colors() {
-        CodePegColor[] codePegColors = {BLUE, MAGENTA};
+    public void should_create_code_from_pegs() {
+        CodePeg[] codePegs = {BLUE, MAGENTA};
 
-        Code code = Code.fromColors(codePegColors);
+        Code code = new Code(asList(codePegs));
 
-        Assert.assertEquals(code, createCode(codePegColors));
+        Assert.assertEquals(code, createCode(codePegs));
     }
 }

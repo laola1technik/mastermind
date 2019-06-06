@@ -2,36 +2,35 @@ package at.weblaola1.dev.mastermind;
 
 import android.support.annotation.NonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 class CodeGenerator {
-    private Set<CodePegColor> colors;
+    private Set<CodePeg> pegs;
 
-    CodeGenerator(Set<CodePegColor> colors) {
-        this.colors = colors;
+    CodeGenerator(Set<CodePeg> pegs) {
+        this.pegs = pegs;
     }
 
-    Set<Code> createAllCodes(int codePegColorCount) {
+    Set<Code> createAllCodes(int codePegCount) {
         Set<Code> result = new HashSet<>();
 
-        colors.forEach(codePegColor -> result.add(Code.fromColors(codePegColor)));
+        pegs.forEach(codePeg -> result.add(new Code(Collections.singletonList(codePeg))));
 
-        return createCombinations(result, codePegColorCount);
+        return createCombinations(result, codePegCount);
     }
 
     @NonNull
-    private Set<Code> createCombinations(Set<Code> result, int codePegColorCount) {
-        if (codePegColorCount <= 1) {
+    private Set<Code> createCombinations(Set<Code> result, int codePegCount) {
+        if (codePegCount <= 1) {
             return result;
         }
         Set<Code> newResult = new HashSet<>();
-        result.forEach(code -> {
-            colors.forEach(codePegColor -> {
-                Code copiedCode = Code.fromCodeAndColor(code, codePegColor);
-                newResult.add(copiedCode);
-            });
-        });
-        return createCombinations(newResult, codePegColorCount - 1);
+        result.forEach(code -> pegs.forEach(codePeg -> {
+            Code copiedCode = Code.fromCodeAndPeg(code, codePeg);
+            newResult.add(copiedCode);
+        }));
+        return createCombinations(newResult, codePegCount - 1);
     }
 }
