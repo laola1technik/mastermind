@@ -1,14 +1,9 @@
 package at.weblaola1.dev.mastermind;
 
-import java.util.ArrayList;
-
+import static java.util.Arrays.asList;
+//TODO: remove this
 class TestCodeProvider {
     static Code createCode(CodePegColor... codePegColors) {
-        ArrayList<CodePeg> codePegs = new ArrayList<>();
-
-        for (CodePegColor codePegColor : codePegColors) {
-            codePegs.add(new CodePeg(codePegColor));
-        }
-        return new Code(codePegs);
+        return new Code(asList(codePegColors));
     }
 }

@@ -3,59 +3,55 @@ package at.weblaola1.dev.mastermind;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 class Code {
-    private List<CodePeg> codePegs;
+    private List<CodePegColor> codePegColors;
 
-    Code(List<CodePeg> codePegs) {
-        this.codePegs = codePegs;
+    Code(List<CodePegColor> codePegColors) {
+        this.codePegColors = codePegColors;
     }
 
     static Code fromColors(CodePegColor... colors) {
-        List<CodePeg> codePegs = new ArrayList<>();
-        Arrays.stream(colors).forEach(color -> codePegs.add(new CodePeg(color)));
-
-        return new Code(codePegs);
+        // TODO: remove this
+        return new Code(asList(colors));
     }
 
+    // TODO remove static function and make it code.addPeg(CodePegColor codePegColor)
     static Code fromCodeAndColor(Code code, CodePegColor codePegColor) {
-        List<CodePeg> codePegsCopy = new ArrayList<>(code.codePegs);
-        codePegsCopy.add(new CodePeg(codePegColor));
-        return new Code(codePegsCopy);
+        List<CodePegColor> codePegColorsCopy = new ArrayList<>(code.codePegColors);
+        codePegColorsCopy.add(codePegColor);
+        return new Code(codePegColorsCopy);
     }
 
     CompareResult compareWith(Code guessedCode) {
-        List<CodePeg> remainingCodePegs = new ArrayList<>(codePegs);
-        List<CodePeg> remainingGuessedCodePegs = new ArrayList<>(guessedCode.codePegs);
+        List<CodePegColor> remainingCodePegColors = new ArrayList<>(codePegColors);
+        List<CodePegColor> remainingGuessedCodePegs = new ArrayList<>(guessedCode.codePegColors);
         CompareResult compareResult = new CompareResult();
 
-        removeWellPlacedPegs(remainingCodePegs, remainingGuessedCodePegs);
+        removeWellPlacedPegs(remainingCodePegColors, remainingGuessedCodePegs);
 
-        compareResult.setNumberOfWellPlaced(codePegs.size() - remainingCodePegs.size());
-        compareResult.setNumberOfMisplaced(countMisplacedCodePegs(remainingCodePegs, remainingGuessedCodePegs));
+        compareResult.setNumberOfWellPlaced(codePegColors.size() - remainingCodePegColors.size());
+        compareResult.setNumberOfMisplaced(countMisplacedCodePegs(remainingCodePegColors, remainingGuessedCodePegs));
 
         return compareResult;
     }
 
-    private void removeWellPlacedPegs(List<CodePeg> codePegs, List<CodePeg> guessedCodePegs) {
-        for (int codePegIndex = this.codePegs.size() - 1; codePegIndex >= 0; codePegIndex--) {
-            if (this.codePegs.get(codePegIndex).equals(guessedCodePegs.get(codePegIndex))) {
-                codePegs.remove(codePegIndex);
-                guessedCodePegs.remove(codePegIndex);
+    private void removeWellPlacedPegs(List<CodePegColor> codePegColors, List<CodePegColor> guessedCodePegColors) {
+        for (int codePegColorIndex = this.codePegColors.size() - 1; codePegColorIndex >= 0; codePegColorIndex--) {
+            if (this.codePegColors.get(codePegColorIndex).equals(guessedCodePegColors.get(codePegColorIndex))) {
+                codePegColors.remove(codePegColorIndex);
+                guessedCodePegColors.remove(codePegColorIndex);
             }
         }
     }
 
-    private int countMisplacedCodePegs(List<CodePeg> codePegs, List<CodePeg> guessedCodePegs) {
-        List<CodePegColor> pegColors = guessedCodePegs.stream().map(CodePeg::getType)
-                .collect(Collectors.toList());
-
-        return (int) codePegs.stream()
-                .filter(codePeg -> removedMisplacedPeg(pegColors, codePeg.getType()))
+    private int countMisplacedCodePegs(List<CodePegColor> codePegColors, List<CodePegColor> guessedCodePegColors) {
+        return (int) codePegColors.stream()
+                .filter(codePegColor -> removedMisplacedPeg(guessedCodePegColors, codePegColor))
                 .count();
     }
 
@@ -73,17 +69,17 @@ class Code {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Code code = (Code) o;
-        return Objects.equals(codePegs, code.codePegs);
+        return Objects.equals(codePegColors, code.codePegColors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(codePegs);
+        return Objects.hash(codePegColors);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Code{" + codePegs + '}';
+        return "Code{" + codePegColors + '}';
     }
 }

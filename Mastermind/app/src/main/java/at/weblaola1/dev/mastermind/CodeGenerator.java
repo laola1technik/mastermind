@@ -12,17 +12,17 @@ class CodeGenerator {
         this.colors = colors;
     }
 
-    Set<Code> createAllCodes(int codePegCount) {
+    Set<Code> createAllCodes(int codePegColorCount) {
         Set<Code> result = new HashSet<>();
 
         colors.forEach(codePegColor -> result.add(Code.fromColors(codePegColor)));
 
-        return createCombinations(result, codePegCount);
+        return createCombinations(result, codePegColorCount);
     }
 
     @NonNull
-    private Set<Code> createCombinations(Set<Code> result, int codePegCount) {
-        if (codePegCount <= 1) {
+    private Set<Code> createCombinations(Set<Code> result, int codePegColorCount) {
+        if (codePegColorCount <= 1) {
             return result;
         }
         Set<Code> newResult = new HashSet<>();
@@ -32,6 +32,6 @@ class CodeGenerator {
                 newResult.add(copiedCode);
             });
         });
-        return createCombinations(newResult, codePegCount - 1);
+        return createCombinations(newResult, codePegColorCount - 1);
     }
 }
