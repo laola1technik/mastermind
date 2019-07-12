@@ -1,12 +1,12 @@
 TODOs
+Assertion for two pairs needs to check length
+Remove Set from CodeSet name (in test file)
 step 2 (start with two pairs (XXYY) )
 step 3 (compare codes (start guess code))
 step 4 if 4 well placed -> done
 step 5 compare all possible codes (mit start guess); if result != first result -> delete from all possible codes
 step 6 min/max
 create CodePeg interface?
-
-
 
 AI algorithm
 https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm#mastermind-five-guess-algorithm
