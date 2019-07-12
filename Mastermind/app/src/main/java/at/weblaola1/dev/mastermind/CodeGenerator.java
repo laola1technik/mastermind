@@ -32,4 +32,8 @@ class CodeGenerator {
         }));
         return createCombinations(newResult, codePegCount - 1);
     }
+
+    Code createTwoPairs() {
+        return new Code(CodePeg.BLUE, CodePeg.BLUE, CodePeg.MAGENTA, CodePeg.MAGENTA);
+    }
 }

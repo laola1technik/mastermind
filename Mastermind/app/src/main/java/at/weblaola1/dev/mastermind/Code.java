@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,5 +79,9 @@ class Code {
     @Override
     public String toString() {
         return "Code{" + codePegs + '}';
+    }
+
+    List<CodePeg> getPegs() {
+        return Collections.unmodifiableList(codePegs);
     }
 }

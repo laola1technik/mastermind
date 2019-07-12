@@ -11,6 +11,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePeg.BLUE;
@@ -98,5 +99,23 @@ public class CodeGeneratorTest {
 
             Assert.assertEquals(1296, generatedCodes.size());
         }
+
+        @Test
+        public void should_generate_code_with_two_pairs() {
+            HashSet<CodePeg> pegTypes = new HashSet<>(asList(CodePeg.values()));
+            CodeGenerator codeGenerator = new CodeGenerator(pegTypes);
+
+            Code codeOfTwoPairs = codeGenerator.createTwoPairs();
+
+            assertCodeConsistsOfTwoPairs(codeOfTwoPairs);
+        }
+
+        private void assertCodeConsistsOfTwoPairs(Code codeOfTwoPairs) {
+            List<CodePeg> codePegs = codeOfTwoPairs.getPegs();
+            Assert.assertEquals(codePegs.get(0), codePegs.get(1));
+            Assert.assertEquals(codePegs.get(2), codePegs.get(3));
+            Assert.assertNotEquals(codePegs.get(1), codePegs.get(2));
+        }
+
     }
 }
