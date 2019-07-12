@@ -27,7 +27,12 @@ public class CodeGeneratorTest {
         private Set<CodePeg> pegs;
         private Set<Code> expectedCodes;
 
-        public CodeGeneratorParameterizedTests(String testName, int pegCount, Set<CodePeg> pegs, Set<Code> expectedCodes) {
+        public CodeGeneratorParameterizedTests(
+                @SuppressWarnings("unused") String testName,
+                int pegCount,
+                Set<CodePeg> pegs,
+                Set<Code> expectedCodes
+        ) {
             this.pegCount = pegCount;
             this.pegs = pegs;
             this.expectedCodes = expectedCodes;
@@ -81,14 +86,13 @@ public class CodeGeneratorTest {
         private static HashSet<Code> createCodeSet(Code... codes) {
             return new HashSet<>(asList(codes));
         }
-
-
     }
 
     public static class CodeGeneratorTests {
         @Test
         public void should_generate_1296_different_codes_for_code_length_4_and_6_pegs() {
-            CodeGenerator codeGenerator = new CodeGenerator(new HashSet<>(asList(CodePeg.values())));
+            HashSet<CodePeg> pegTypes = new HashSet<>(asList(CodePeg.values()));
+            CodeGenerator codeGenerator = new CodeGenerator(pegTypes);
 
             Set<Code> generatedCodes = codeGenerator.createAllCodes(4);
 

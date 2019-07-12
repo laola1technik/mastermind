@@ -21,7 +21,13 @@ public class MastermindTest {
     private final int wellPlaced;
     private final int misplaced;
 
-    public MastermindTest(String testName, Code correctCode, Code guessedCode, int wellPlaced, int misplaced) {
+    public MastermindTest(
+            @SuppressWarnings("unused") String testName,
+            Code correctCode,
+            Code guessedCode,
+            int wellPlaced,
+            int misplaced
+    ) {
         this.correctCode = correctCode;
         this.guessedCode = guessedCode;
         this.wellPlaced = wellPlaced;
