@@ -1,5 +1,4 @@
 TODOs
-Assertion for two pairs needs to check length
 Remove Set from CodeSet name (in test file)
 step 2 (start with two pairs (XXYY) )
 step 3 (compare codes (start guess code))

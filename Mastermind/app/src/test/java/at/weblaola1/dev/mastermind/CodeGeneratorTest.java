@@ -115,6 +115,7 @@ public class CodeGeneratorTest {
             Assert.assertEquals(codePegs.get(0), codePegs.get(1));
             Assert.assertEquals(codePegs.get(2), codePegs.get(3));
             Assert.assertNotEquals(codePegs.get(1), codePegs.get(2));
+            Assert.assertEquals(4, codePegs.size());
         }
 
     }
