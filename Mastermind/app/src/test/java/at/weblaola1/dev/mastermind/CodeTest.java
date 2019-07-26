@@ -14,12 +14,12 @@ public class CodeTest {
     public void should_not_add_same_code_twice() {
         Code code = new Code(BLUE, MAGENTA);
         Code sameCode = new Code(BLUE, MAGENTA);
-        Set<Code> codeSet = new HashSet<>();
+        Set<Code> codes = new HashSet<>();
 
-        codeSet.add(code);
-        codeSet.add(sameCode);
+        codes.add(code);
+        codes.add(sameCode);
 
-        Assert.assertEquals(1, codeSet.size());
+        Assert.assertEquals(1, codes.size());
     }
 
     @Test

@@ -55,25 +55,25 @@ public class CodeGeneratorTest {
                             "should create codes for code length one and one peg",
                             1,
                             EnumSet.of(GREEN),
-                            createCodeSet(new Code(GREEN))
+                            createCodes(new Code(GREEN))
                     },
                     {
                             "should create all codes for code length two and one peg",
                             2,
                             EnumSet.of(GREEN),
-                            createCodeSet(new Code(GREEN, GREEN))
+                            createCodes(new Code(GREEN, GREEN))
                     },
                     {
                             "should create all codes for code length one and two pegs",
                             1,
                             EnumSet.of(GREEN, BLUE),
-                            createCodeSet(new Code(GREEN), new Code(BLUE))
+                            createCodes(new Code(GREEN), new Code(BLUE))
                     },
                     {
                             "should create all codes for code length two and two pegs",
                             2,
                             EnumSet.of(GREEN, BLUE),
-                            createCodeSet(
+                            createCodes(
                                     new Code(GREEN, GREEN),
                                     new Code(GREEN, BLUE),
                                     new Code(BLUE, GREEN),
@@ -84,7 +84,7 @@ public class CodeGeneratorTest {
         }
 
         @NonNull
-        private static HashSet<Code> createCodeSet(Code... codes) {
+        private static HashSet<Code> createCodes(Code... codes) {
             return new HashSet<>(asList(codes));
         }
     }
