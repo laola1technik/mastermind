@@ -38,4 +38,13 @@ public class CodeTest {
 
         Assert.assertEquals(code, new Code(codePegs));
     }
+
+    @Test
+    public void should_return_compare_result_with_four_well_placed() {
+        Code code = new Code(BLUE, BLUE, MAGENTA, MAGENTA);
+
+        CompareResult compareResult = code.compareWith(code);
+
+        Assert.assertEquals(4, compareResult.getNumberOfWellPlaced());
+    }
 }
