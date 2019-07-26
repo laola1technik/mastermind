@@ -110,6 +110,17 @@ public class CodeGeneratorTest {
             assertCodeConsistsOfTwoPairs(codeOfTwoPairs);
         }
 
+        @Test
+        public void should_generate_random_code() {
+            HashSet<CodePeg> codePegs = new HashSet<>(Arrays.asList(CodePeg.values()));
+            CodeGenerator codeGenerator = new CodeGenerator(codePegs);
+            Code randomCode = codeGenerator.createRandomCode(4);
+            Assert.assertEquals(4, randomCode.getPegs().size());
+            Code randomCode2 = codeGenerator.createRandomCode(4);
+            Assert.assertFalse(randomCode.equals(randomCode2));
+
+        }
+
         private void assertCodeConsistsOfTwoPairs(Code codeOfTwoPairs) {
             List<CodePeg> codePegs = codeOfTwoPairs.getPegs();
             Assert.assertEquals(codePegs.get(0), codePegs.get(1));
@@ -117,6 +128,7 @@ public class CodeGeneratorTest {
             Assert.assertNotEquals(codePegs.get(1), codePegs.get(2));
             Assert.assertEquals(4, codePegs.size());
         }
+
 
     }
 }
