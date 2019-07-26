@@ -45,6 +45,6 @@ public class CodeTest {
 
         CompareResult compareResult = code.compareWith(code);
 
-        Assert.assertEquals(4, compareResult.getNumberOfWellPlaced());
+        Assert.assertTrue(compareResult.allWellPlaced());
     }
 }

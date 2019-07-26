@@ -19,4 +19,8 @@ class CompareResult {
     void setNumberOfWellPlaced(int numberOfWellPlaced) {
         this.numberOfWellPlaced = numberOfWellPlaced;
     }
+
+    boolean allWellPlaced() {
+        return numberOfWellPlaced == 4;
+    }
 }
