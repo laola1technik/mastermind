@@ -1,6 +1,6 @@
 TODOs
-Random Code Generator Test: compares three random codes instead of two
-CodeMaker makes random code
+CodeGenerator line 42 omg look at this
+Extracts magic numbers to "game" class
 
 step 4 if 4 well placed -> done
 step 5 compare all possible codes (mit start guess); if result != first result -> delete from all possible codes
@@ -14,6 +14,7 @@ https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm#mastermind-five-gu
 up to 4 key pegs
     well placed
     misplaced
+
 
 Extensions:
 UI
