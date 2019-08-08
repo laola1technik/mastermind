@@ -16,9 +16,12 @@ import java.util.Set;
 
 import static at.weblaola1.dev.mastermind.CodePeg.BLUE;
 import static at.weblaola1.dev.mastermind.CodePeg.GREEN;
+import static at.weblaola1.dev.mastermind.CodePeg.RED;
 import static java.util.Arrays.asList;
+import static junit.framework.TestCase.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.Assert.assertNotEquals;
 
 @RunWith(Enclosed.class)
 public class CodeGeneratorTest {
@@ -112,6 +115,24 @@ public class CodeGeneratorTest {
         }
 
         @Test
+        public void should_generate_codes_with_two_pairs_red_green() {
+            HashSet<CodePeg> pegTypes = new HashSet<>(asList(RED, GREEN));
+            CodeGenerator codeGenerator = new CodeGenerator(pegTypes);
+
+            Code codeOfTwoPairs = codeGenerator.createTwoPairs();
+
+            assertPairColors(codeOfTwoPairs, RED, GREEN);
+            assertCodeConsistsOfTwoPairs(codeOfTwoPairs);
+        }
+
+        private void assertPairColors(Code codeOfTwoPairs, CodePeg firstPair, CodePeg secondPair) {
+            long amountFirst = codeOfTwoPairs.getPegs().stream().filter(peg -> peg == firstPair).count();
+            long amountSecond = codeOfTwoPairs.getPegs().stream().filter(peg -> peg == secondPair).count();
+            assertNotEquals(0, amountSecond);
+            assertEquals(amountFirst, amountSecond);
+        }
+
+        @Test
         public void should_generate_random_code() {
             HashSet<CodePeg> codePegs = new HashSet<>(Arrays.asList(CodePeg.values()));
             CodeGenerator codeGenerator = new CodeGenerator(codePegs);
@@ -129,7 +150,7 @@ public class CodeGeneratorTest {
             List<CodePeg> codePegs = codeOfTwoPairs.getPegs();
             Assert.assertEquals(codePegs.get(0), codePegs.get(1));
             Assert.assertEquals(codePegs.get(2), codePegs.get(3));
-            Assert.assertNotEquals(codePegs.get(1), codePegs.get(2));
+            assertNotEquals(codePegs.get(1), codePegs.get(2));
             Assert.assertEquals(4, codePegs.size());
         }
 

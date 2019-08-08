@@ -2,7 +2,6 @@ package at.weblaola1.dev.mastermind;
 
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,13 +34,17 @@ class CodeGenerator {
     }
 
     Code createTwoPairs() {
-        return new Code(CodePeg.BLUE, CodePeg.BLUE, CodePeg.MAGENTA, CodePeg.MAGENTA);
+        Object[] pegsArray = pegs.toArray();
+        if (pegsArray == null || pegsArray.length < 2) {
+            throw new RuntimeException("No Pegs provided ");
+        }
+        return new Code((CodePeg) pegsArray[0], (CodePeg) pegsArray[0], (CodePeg) pegsArray[1], (CodePeg) pegsArray[1]);
     }
 
     Code createRandomCode(int codePegCount) {
         CodePeg[] codePegs = new CodePeg[codePegCount];
-        for(int i = 0; i < codePegCount; i++) {
-            codePegs[i]=CodePeg.getRandom();
+        for (int i = 0; i < codePegCount; i++) {
+            codePegs[i] = CodePeg.getRandom();
         }
 
         return new Code(codePegs);
