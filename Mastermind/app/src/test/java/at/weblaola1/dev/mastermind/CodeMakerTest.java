@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class CodeMakerTest {
 
     @Test
-    public void should_generate_random_code() {
+    public void should_hold_code_of_size_four() {
         CodeMaker codeMaker = new CodeMaker();
 
         assertEquals(4, codeMaker.getCode().getPegs().size());

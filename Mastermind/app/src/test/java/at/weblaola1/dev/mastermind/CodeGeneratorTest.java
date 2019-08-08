@@ -18,6 +18,7 @@ import static at.weblaola1.dev.mastermind.CodePeg.BLUE;
 import static at.weblaola1.dev.mastermind.CodePeg.GREEN;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 
 @RunWith(Enclosed.class)
 public class CodeGeneratorTest {
@@ -114,11 +115,14 @@ public class CodeGeneratorTest {
         public void should_generate_random_code() {
             HashSet<CodePeg> codePegs = new HashSet<>(Arrays.asList(CodePeg.values()));
             CodeGenerator codeGenerator = new CodeGenerator(codePegs);
-            Code randomCode = codeGenerator.createRandomCode(4);
-            Assert.assertEquals(4, randomCode.getPegs().size());
-            Code randomCode2 = codeGenerator.createRandomCode(4);
-            Assert.assertFalse(randomCode.equals(randomCode2));
 
+            Set<Code> codes = new HashSet<>(asList(
+                    codeGenerator.createRandomCode(4),
+                    codeGenerator.createRandomCode(4),
+                    codeGenerator.createRandomCode(4)
+            ));
+
+            Assert.assertThat(codes.size(), greaterThan(1));
         }
 
         private void assertCodeConsistsOfTwoPairs(Code codeOfTwoPairs) {
