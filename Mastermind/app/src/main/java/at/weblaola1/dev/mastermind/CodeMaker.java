@@ -1,20 +1,14 @@
 package at.weblaola1.dev.mastermind;
 
-import static at.weblaola1.dev.mastermind.CodePeg.*;
-
-public class CodeMaker {
+class CodeMaker {
 
     private Code code;
 
-    CodeMaker() {
-        code = new Code(BLUE, GREEN, RED, MAGENTA);
+    CodeMaker(CodeGenerator codeGenerator) {
+        code = codeGenerator.createRandomCode(4);
     }
 
     Code getCode() {
         return code;
-    }
-
-    public void setCode(Code code) {
-        this.code = code;
     }
 }
