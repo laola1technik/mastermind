@@ -34,11 +34,11 @@ class CodeGenerator {
     }
 
     Code createTwoPairs() {
-        Object[] pegsArray = pegs.toArray();
-        if (pegsArray == null || pegsArray.length < 2) {
+        CodePeg[] pegsArray = pegs.toArray(new CodePeg[]{});
+        if (pegsArray.length < 2) {
             throw new RuntimeException("No Pegs provided ");
         }
-        return new Code((CodePeg) pegsArray[0], (CodePeg) pegsArray[0], (CodePeg) pegsArray[1], (CodePeg) pegsArray[1]);
+        return new Code(pegsArray[0], pegsArray[0], pegsArray[1], pegsArray[1]);
     }
 
     Code createRandomCode(int codePegCount) {
