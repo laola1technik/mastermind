@@ -40,13 +40,4 @@ class CodeGenerator {
         }
         return new Code(pegsArray[0], pegsArray[0], pegsArray[1], pegsArray[1]);
     }
-
-    Code createRandomCode(int codePegCount) {
-        CodePeg[] codePegs = new CodePeg[codePegCount];
-        for (int i = 0; i < codePegCount; i++) {
-            codePegs[i] = CodePeg.getRandom();
-        }
-
-        return new Code(codePegs);
-    }
 }

@@ -20,7 +20,6 @@ import static at.weblaola1.dev.mastermind.CodePeg.RED;
 import static java.util.Arrays.asList;
 import static junit.framework.TestCase.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertNotEquals;
 
 @RunWith(Enclosed.class)
@@ -130,20 +129,6 @@ public class CodeGeneratorTest {
             long amountSecond = codeOfTwoPairs.getPegs().stream().filter(peg -> peg == secondPair).count();
             assertNotEquals(0, amountSecond);
             assertEquals(amountFirst, amountSecond);
-        }
-
-        @Test
-        public void should_generate_random_code() {
-            HashSet<CodePeg> codePegs = new HashSet<>(Arrays.asList(CodePeg.values()));
-            CodeGenerator codeGenerator = new CodeGenerator(codePegs);
-
-            Set<Code> codes = new HashSet<>(asList(
-                    codeGenerator.createRandomCode(4),
-                    codeGenerator.createRandomCode(4),
-                    codeGenerator.createRandomCode(4)
-            ));
-
-            Assert.assertThat(codes.size(), greaterThan(1));
         }
 
         private void assertCodeConsistsOfTwoPairs(Code codeOfTwoPairs) {
